@@ -1,0 +1,144 @@
+//You can contact me by 565420423@qq.com --Mr.Xu
+@charset "utf-8";
+
+$baseColor: #148bc8;
+$baseHover: #3bb5fc;
+
+// xyx filter
+@mixin xyx_filter_one($val){
+    filter: $val;
+    -webkit-filter: $val;
+}
+
+// xyx  %filter->brightness
+@mixin xyx_filter_bright($num){
+    @include xyx_filter_one(brightness($num));
+}
+
+// xyx widht and height
+@mixin xyx_wh($w,$h){
+    width: $w;
+    height: $h;
+}
+
+// xyx @media
+@mixin xyx_media_width($t,$w){
+    @media screen and(#{$t}-width:$w){
+        // @content this is content
+        @content;
+    }
+}
+
+// xyx @media two
+@mixin xyx_media_and($w1,$w2){
+    @media screen and (max-width: $w1) and (min-width: $w2){
+        // @content this is content
+        @content;
+    }
+}
+
+//xyx absolute
+@mixin xyx_abs($t:auto,$r:auto,$b:auto,$l:auto){
+    position: absolute;
+    left: $l;right: $r;top: $t;bottom: $b;
+}
+
+//xyx relative
+@mixin xyx_rel($t:auto,$r:auto,$b:auto,$l:auto){
+    position: relative;
+    left: $l;right: $r;top: $t;bottom: $b;
+}
+
+//xyx cut of the inline-block
+@mixin xyx_cut_inb($num){
+    display: inline-block;
+    width: (100%/$num);
+}
+
+//xyx cut of the float
+@mixin xyx_cut_flo($num){
+    float: left;
+    width: (100%/$num);
+}
+
+//xyx border of the square
+@mixin xyx_border_square($w,$t,$c,$b){
+    border: $w $c $t;
+    border-radius: $b;
+}
+
+//xyx about of flex
+.flex{
+    display: flex;
+}
+%flex{
+    display: flex;
+}
+.flex_row{
+    display: flex;
+    flex-direction: row;
+}
+.flex_column{
+    display: flex;
+    flex-direction: column;
+}
+.flex_align{
+    justify-content: center;
+    align-items: center;
+}
+.flex_row_center{
+    flex-direction: row;
+    justify-content: center;
+}
+.flex_row_between{
+    flex-direction: row;
+    justify-content: space-between;
+}
+.flex_column_center{
+    flex-direction: column;
+    align-items: center;
+}
+
+//xyx resolve the margin bug
+.clearHeight{
+    @include xyx_border_square(1px,solid,#ffffff,12px);
+}
+
+//xyx phone flex =? rem 
+@function fr($num,$scale:64) { 
+    @if $num == 0{
+        @return 0;
+    }
+    @else {
+        @return #{($num/$scale)}rem;
+    }
+}
+// 类型:margin or padding  -->?  上右下左
+@mixin fr_mp($type:'margin',$num1:0,$num2:0,$num3:0,$num4:0){
+    @if $num1 == $num2 and $num1 == $num3 and $num1 == $num4{
+        #{$type}: fr($num1);
+    }
+    @else if $num1 == $num3 and $num2 == $num4 {
+        #{$type}: fr($num1) fr($num4);
+    }
+    @else if $num1 != $num3 and $num2 == $num4 {
+        #{$type}: fr($num1) fr($num2) fr($num3);
+    }
+    @else {
+        #{$type}: fr($num1) fr($num2) fr($num3) fr($num4);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
