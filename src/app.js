@@ -4,10 +4,17 @@ import { createRouter } from './router'
 import { createStore } from './store'
 import { sync } from 'vuex-router-sync'
 import { mixins } from './mixin'
+import * as filters from './util/filters'
+import titleMixin from './util/title'
+
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key])
+})
+Vue.mixin(titleMixin)
 
 import ElementUI from 'element-ui'
 // import 'element-ui/lib/theme-chalk/index.css';
-require('./assets/style/base.scss');
+// require('./assets/style/base.scss');
 
 // 混合全局
 Vue.mixin(mixins)

@@ -14,7 +14,7 @@ export default {
   gamePost(params = {}) {
     return new Promise((resolve, reject) => {
       API.post(M['API']['POST_gamePost'], params).then((data) => {
-        resolve(data);
+        resolve(data.data||data);
       });
     });
   }

@@ -2,47 +2,43 @@
 	<div id="secondcomponent">
 		<el-card class="box-card">
 			<div class="bbb">测试接口</div>
-			<ul>
-				<div v-html="loading">
-				</div>
-				<li v-for="item in items">{{item.title}}</li>
+			<ul :key="gamePage" v-if="gamePage > 0">
+				<img src='/static/img/loading.gif' v-show="loading">
+				<li v-for="item in items" :key="item.id">{{item.title}}</li>
 			</ul>
 		</el-card>
-
 	</div>
 	
 </template>
 
 <script type="text/javascript">
-import Service from './service';
 export default {
-	data() {
+	props:{
+		type: String,
+		gamePage: Number
+	},
+	data() { 
 		return {
-			items: [],
-			start: 1,
-			loading: "<img src='/static/img/loading.gif'>"
-		}
+			loading: true
+		} 
 	}, 
-	created(){
-		this.getGamePost(); 
+	created() {
+        if(this.items.length!=0){
+            this.loading = false
+        }
 	},
-	watch:{
-		items:function(){
-			console.log("发生变化")
-			this.loading = ""
+	watch: {
+		items: function(val,oldVal){
+			this.loading = (this.items && this.items.length>0) ? false : true
 		}
 	},
-	methods: {
-		getGamePost() {
-			Service.gamePost({
-				start:1
-			}).then((data) => {
-				console.log(data)
-				this.items = data.data
-			}).catch((data) => {
-				console.log(data)
-			})
-		}
-	}
+    computed: {
+        page(){
+			return Number(this.$route.params.page) || 1
+		},
+        items(){
+            return this.$store.state.items[this.gamePage]
+        }
+    }
 }
 </script>

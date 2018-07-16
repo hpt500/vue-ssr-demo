@@ -1,14 +1,18 @@
 import Vue from 'vue'
 import Router from 'vue-router';
+
 Vue.use(Router)
+
+const createListView = id => () => import("R/CreateListView").then(m => m.default(id))
+
 export function createRouter() {
     return new Router({
         mode: 'history',
         routes: [
             {
                 name: 'comp1',
-                path: '/comp1',
-                component: ()=> import("R/comp1.vue")
+                path: '/comp1/:page(\\d+)?',
+                component: createListView('comp1')
             },
             {
                 name: 'comp2',

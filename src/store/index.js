@@ -1,16 +1,26 @@
 // store.js
 import Vue from 'vue'
 import Vuex from 'vuex'
-import * as actions from './actions'
+import actions from './actions'
 import getters from './getters'
-import modules from './modules/index'
+import mutations from './mutations'
+// import modules from './modules/index'
 Vue.use(Vuex)
 
 export function createStore() {
   return new Vuex.Store({
+    state: {
+      activeType: null,
+      itemsPerPage: 20,
+      items: {},
+      lists: {
+        
+      }
+    },
     actions,
     getters,
-    modules,
+    mutations,
+    // modules,
     strict: false
   })
 }

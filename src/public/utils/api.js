@@ -8,7 +8,7 @@ import C from '../conf'
 axios.defaults.headers.get['X-Requested-With'] = 'XMLHttpRequest'
 axios.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest'
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
-axios.defaults.timeout = 5000;   // 超时时间
+axios.defaults.timeout = 10000;   // 超时时间
 // axios.defaults.withCredentials = true 
 
 function ajax(url, type, options) {

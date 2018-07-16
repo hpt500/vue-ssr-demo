@@ -5,7 +5,7 @@ import { initMock } from '@/public/utils/confUtils';
 const mData = {
   resource: {
     API: {
-      POST_postGame: {
+      POST_gamePost: {
         "code": 200,
         "data": [
           {
